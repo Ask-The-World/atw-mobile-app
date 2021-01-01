@@ -32,13 +32,34 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(
+        backgroundColor: Color(0xff1a1d33),
+        textColor: Color(0xffeefdff),
+        cardBackgroundColor: Color(0xff3f80a0),
+        yesColor: Color(0xff7fc757),
+        noColor: Color(0xffde4630),
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage(
+      {Key key,
+      this.backgroundColor,
+      this.textColor,
+      this.cardBackgroundColor,
+      this.yesColor,
+      this.noColor})
+      : super(
+          key: key,
+        );
+
+  final Color backgroundColor;
+  final Color textColor;
+  final Color cardBackgroundColor;
+  final Color yesColor;
+  final Color noColor;
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -63,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      backgroundColor: Color(0xff1a1d33),
+      backgroundColor: widget.backgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -77,12 +98,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(color: Colors.red)),
-                  color: Colors.red,
+                      side: BorderSide(color: widget.noColor)),
+                  color: widget.noColor,
                   onPressed: () {},
                   child: Icon(
                     Icons.clear,
-                    color: Colors.white,
+                    color: widget.textColor,
                     size: 80.0,
                   ),
                 ),
@@ -98,9 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
-                        side: BorderSide(color: Color(0xFF3f80a0))),
+                        side: BorderSide(color: widget.cardBackgroundColor)),
                     child: Draggable(
-                        feedback: cw.QuestionCard(),
+                        feedback: cw.QuestionCard(
+                          textColor: widget.textColor,
+                          cardBackgroundColor: widget.cardBackgroundColor,
+                        ),
                         axis: Axis.vertical,
                         child: cw.QuestionCard()),
                   ),
@@ -117,13 +141,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    side: BorderSide(color: Colors.green),
+                    side: BorderSide(color: widget.yesColor),
                   ),
-                  color: Colors.green,
+                  color: widget.yesColor,
                   onPressed: () {},
                   child: Icon(
                     Icons.done,
-                    color: Colors.white,
+                    color: widget.textColor,
                     size: 80.0,
                   ),
                 ),
@@ -140,21 +164,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Icon(Icons.help_outline,
-                        color: Colors.white, size: 40.0),
+                        color: widget.textColor, size: 40.0),
                   ),
                 ),
                 FlatButton(
                   onPressed: () {},
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.add, color: Colors.white, size: 50.0),
+                    child: Icon(Icons.add, color: widget.textColor, size: 50.0),
                   ),
                 ),
                 FlatButton(
                   onPressed: () {},
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.info, color: Colors.white, size: 40.0),
+                    child:
+                        Icon(Icons.info, color: widget.textColor, size: 40.0),
                   ),
                 )
               ],

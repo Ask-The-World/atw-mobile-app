@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'backend.dart' as backend;
 
 class QuestionCard extends StatefulWidget {
-  QuestionCard({Key key}) : super(key: key);
+  QuestionCard({
+    Key key,
+    this.textColor,
+    this.cardBackgroundColor,
+  }) : super(key: key);
+
+  final Color textColor;
+  final Color cardBackgroundColor;
 
   @override
   _QuestionCardState createState() => _QuestionCardState();
