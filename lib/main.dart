@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'backend.dart' as backend;
+import 'customwidgets.dart' as cw;
 
 void main() {
   runApp(MyApp());
@@ -50,19 +52,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -83,67 +72,13 @@ class _MyHomePageState extends State<MyHomePage> {
         // in the middle of the parent.
         child: Stack(
           children: [
-            Positioned(
-              top: -20.0,
-              left: 20.0,
-              child: Card(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2),
-                    color: Color(0xFF3f80a0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(50),
-                    child: Text(
-                      "Hello, 2nd Test",
-                      style: TextStyle(color: Color(0xffeefdff)),
-                    ),
-                  ),
-                ),
-              ),
+            Card(
+              child: Draggable(
+                  feedback: cw.QuestionCard(), child: cw.QuestionCard()),
             ),
-            Draggable(
-              axis: Axis.vertical,
-              childWhenDragging: Container(),
-              feedback: Card(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2),
-                    color: Color(0xFF3f80a0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      "Hello, Test",
-                      style: TextStyle(color: Color(0xffeefdff)),
-                    ),
-                  ),
-                ),
-              ),
-              child: Card(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2),
-                    color: Color(0xFF3f80a0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      "Hello, Test",
-                      style: TextStyle(color: Color(0xffeefdff)),
-                    ),
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
