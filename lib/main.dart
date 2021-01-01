@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'backend.dart' as backend;
 import 'customwidgets.dart' as cw;
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -28,13 +32,13 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -44,8 +48,6 @@ class MyHomePage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
-  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -62,22 +64,103 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Color(0xff1a1d33),
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Stack(
-          children: [
-            Card(
-              child: Draggable(
-                  feedback: cw.QuestionCard(), child: cw.QuestionCard()),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(flex: 1, child: Container()),
+          Expanded(
+            flex: 4,
+            child: FractionallySizedBox(
+              widthFactor: 0.8,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(color: Colors.red)),
+                  color: Colors.red,
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.clear,
+                    color: Colors.white,
+                    size: 80.0,
+                  ),
+                ),
+              ),
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            flex: 12,
+            child: FractionallySizedBox(
+              widthFactor: 0.8,
+              child: Stack(
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        side: BorderSide(color: Color(0xFF3f80a0))),
+                    child: Draggable(
+                        feedback: cw.QuestionCard(),
+                        axis: Axis.vertical,
+                        child: cw.QuestionCard()),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: FractionallySizedBox(
+              widthFactor: 0.8,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    side: BorderSide(color: Colors.green),
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.done,
+                    color: Colors.white,
+                    size: 80.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlatButton(
+                  onPressed: () {},
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Icon(Icons.help_outline,
+                        color: Colors.white, size: 40.0),
+                  ),
+                ),
+                FlatButton(
+                  onPressed: () {},
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Icon(Icons.add, color: Colors.white, size: 50.0),
+                  ),
+                ),
+                FlatButton(
+                  onPressed: () {},
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Icon(Icons.info, color: Colors.white, size: 40.0),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

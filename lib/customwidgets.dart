@@ -25,14 +25,17 @@ class _QuestionCardState extends State<QuestionCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        getQuestions();
-        _QuestionCardState();
-        print("reloaded");
+        setState(() {
+          getQuestions();
+          print("reloaded");
+        });
       },
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 2),
+        decoration: ShapeDecoration(
           color: Color(0xFF3f80a0),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(color: Color(0xFF3f80a0))),
         ),
         child: Padding(
             padding: EdgeInsets.all(50),
