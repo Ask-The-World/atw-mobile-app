@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(flex: 1, child: Container()),
           Expanded(
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            flex: 12,
+            flex: 13,
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Stack(
@@ -120,13 +120,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         side: BorderSide(color: widget.cardBackgroundColor)),
-                    child: Draggable(
-                        feedback: cw.QuestionCard(
-                          textColor: widget.textColor,
-                          cardBackgroundColor: widget.cardBackgroundColor,
-                        ),
-                        axis: Axis.vertical,
-                        child: cw.QuestionCard()),
+                    child: cw.QuestionCard(
+                      textColor: widget.textColor,
+                      cardBackgroundColor: widget.cardBackgroundColor,
+                    ),
                   ),
                 ],
               ),
@@ -137,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
+                padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
