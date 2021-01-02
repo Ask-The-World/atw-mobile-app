@@ -60,11 +60,19 @@ class _QuestionCardState extends State<QuestionCard> {
                             TextStyle(color: widget.textColor, fontSize: 40.0),
                       );
                     } else if (snapshot.hasError) {
-                      return Text(
-                        snapshot.error.toString(),
-                        style:
-                            TextStyle(color: widget.textColor, fontSize: 40.0),
-                      );
+                      if (snapshot.error is backend.CustomException) {
+                        return Text(
+                          snapshot.error.toString(),
+                          style: TextStyle(
+                              color: widget.textColor, fontSize: 40.0),
+                        );
+                      } else {
+                        return Text(
+                          "There has been an error connecting to the server :(",
+                          style: TextStyle(
+                              color: widget.textColor, fontSize: 40.0),
+                        );
+                      }
                     }
                     return Text(
                       "nothing loaded yet",
