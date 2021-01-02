@@ -17,49 +17,22 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(
-        backgroundColor: Color(0xff1a1d33),
-        textColor: Color(0xffeefdff),
-        cardBackgroundColor: Color(0xff3f80a0),
-        yesColor: Color(0xff7fc757),
-        noColor: Color(0xffde4630),
-      ),
+          accentColor: Color(0xff7fc757), // yesColor
+          backgroundColor: Color(0xff1a1d33), // backgroundColor
+          cardColor: Color(0xff3f80a0), // cardBackgroundColor
+          errorColor: Color(0xffde4630), // noColor
+          textTheme: TextTheme(
+              bodyText1: TextStyle(color: Color(0xffeefdff)))), // textColor
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage(
-      {Key key,
-      this.backgroundColor,
-      this.textColor,
-      this.cardBackgroundColor,
-      this.yesColor,
-      this.noColor})
+  MyHomePage({Key key})
       : super(
           key: key,
         );
-
-  final Color backgroundColor;
-  final Color textColor;
-  final Color cardBackgroundColor;
-  final Color yesColor;
-  final Color noColor;
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -84,106 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      backgroundColor: widget.backgroundColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(flex: 1, child: Container()),
-          Expanded(
-            flex: 4,
-            child: FractionallySizedBox(
-              widthFactor: 0.8,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(color: widget.noColor)),
-                  color: widget.noColor,
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.clear,
-                    color: widget.textColor,
-                    size: 80.0,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 13,
-            child: FractionallySizedBox(
-              widthFactor: 0.8,
-              child: Stack(
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        side: BorderSide(color: widget.cardBackgroundColor)),
-                    child: cw.QuestionCard(
-                      textColor: widget.textColor,
-                      cardBackgroundColor: widget.cardBackgroundColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: FractionallySizedBox(
-              widthFactor: 0.8,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    side: BorderSide(color: widget.yesColor),
-                  ),
-                  color: widget.yesColor,
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.done,
-                    color: widget.textColor,
-                    size: 80.0,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FlatButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.help_outline,
-                        color: widget.textColor, size: 40.0),
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.add, color: widget.textColor, size: 50.0),
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child:
-                        Icon(Icons.info, color: widget.textColor, size: 40.0),
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: cw.MainPage(),
     );
   }
 }
