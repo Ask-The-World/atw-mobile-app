@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'backend.dart' as backend;
-import 'customwidgets.dart' as cw;
+import 'pages/mainpage.dart' as mp;
 import 'package:flutter/services.dart';
 
 void main() {
@@ -21,6 +20,13 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color(0xff1a1d33), // backgroundColor
           cardColor: Color(0xff3f80a0), // cardBackgroundColor
           errorColor: Color(0xffde4630), // noColor
+          sliderTheme: SliderThemeData(
+            valueIndicatorColor: Color(0xff3f80a0),
+            valueIndicatorTextStyle: TextStyle(color: Color(0xffeefdff)),
+            showValueIndicator: ShowValueIndicator.always,
+            activeTrackColor: Color(0xff3f80a0),
+            thumbColor: Color(0xff3f80a0),
+          ),
           textTheme: TextTheme(
               bodyText1: TextStyle(color: Color(0xffeefdff)))), // textColor
       home: MyHomePage(),
@@ -33,15 +39,6 @@ class MyHomePage extends StatefulWidget {
       : super(
           key: key,
         );
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -58,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: cw.MainPage(),
+      body: mp.MainPage(),
     );
   }
 }

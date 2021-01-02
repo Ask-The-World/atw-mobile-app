@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'backend.dart' as backend;
+import '../server/getquestion.dart' as gq;
+import 'addquestion.dart' as aq;
 
 class QuestionCard extends StatefulWidget {
   QuestionCard({
@@ -11,7 +12,7 @@ class QuestionCard extends StatefulWidget {
 }
 
 class _QuestionCardState extends State<QuestionCard> {
-  Future<backend.GetQuestion> futureGetQuestion;
+  Future<gq.GetQuestion> futureGetQuestion;
 
   @override
   void initState() {
@@ -20,7 +21,7 @@ class _QuestionCardState extends State<QuestionCard> {
   }
 
   void getQuestions() {
-    futureGetQuestion = backend.fetchGetQuestion();
+    futureGetQuestion = gq.fetchGetQuestion();
   }
 
   @override
@@ -45,7 +46,7 @@ class _QuestionCardState extends State<QuestionCard> {
           child: Center(
             child: Padding(
                 padding: EdgeInsets.all(35),
-                child: FutureBuilder<backend.GetQuestion>(
+                child: FutureBuilder<gq.GetQuestion>(
                   future: futureGetQuestion,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
@@ -56,7 +57,7 @@ class _QuestionCardState extends State<QuestionCard> {
                             fontSize: 40.0),
                       );
                     } else if (snapshot.hasError) {
-                      if (snapshot.error is backend.CustomException) {
+                      if (snapshot.error is gq.CustomException) {
                         return Text(
                           snapshot.error.toString(),
                           style: TextStyle(
@@ -174,7 +175,12 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => aq.AddQuestion()));
+                  },
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Icon(Icons.add,
