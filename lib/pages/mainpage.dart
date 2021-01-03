@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../server/getquestion.dart' as gq;
+import '../backend/getquestion.dart' as gq;
 import 'addquestion.dart' as aq;
 
 class QuestionCard extends StatefulWidget {
@@ -106,7 +106,7 @@ class MainPage extends StatelessWidget {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
+                padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -126,15 +126,17 @@ class MainPage extends StatelessWidget {
             flex: 13,
             child: FractionallySizedBox(
               widthFactor: 0.8,
-              child: Stack(
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        side: BorderSide(color: Theme.of(context).cardColor)),
-                    child: QuestionCard(),
-                  ),
-                ],
+              child: Center(
+                child: Stack(
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          side: BorderSide(color: Theme.of(context).cardColor)),
+                      child: QuestionCard(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -162,42 +164,48 @@ class MainPage extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FlatButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.help_outline,
-                        color: Theme.of(context).textTheme.bodyText1.color,
-                        size: 40.0),
-                  ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+              child: Container(
+                color: Theme.of(context).cardColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FlatButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Icon(Icons.help_outline,
+                            color: Theme.of(context).textTheme.bodyText1.color,
+                            size: 40.0),
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => aq.AddQuestion()));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Icon(Icons.add,
+                            color: Theme.of(context).textTheme.bodyText1.color,
+                            size: 50.0),
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Icon(Icons.info,
+                            color: Theme.of(context).textTheme.bodyText1.color,
+                            size: 40.0),
+                      ),
+                    )
+                  ],
                 ),
-                FlatButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => aq.AddQuestion()));
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.add,
-                        color: Theme.of(context).textTheme.bodyText1.color,
-                        size: 50.0),
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.info,
-                        color: Theme.of(context).textTheme.bodyText1.color,
-                        size: 40.0),
-                  ),
-                )
-              ],
+              ),
             ),
           )
         ],
