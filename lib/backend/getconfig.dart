@@ -15,7 +15,7 @@ class GetConfig {
       minTime: json["min_time"],
       maxTime: json["max_time"],
       defaultTime: json["default_time"],
-      maxQuestionLength: json["max_question_lenght"],
+      maxQuestionLength: json["max_question_length"],
     );
   }
 }
