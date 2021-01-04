@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/mainpage.dart' as mp;
 import 'package:flutter/services.dart';
+import 'backend/getconfig.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,6 +46,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  GetConfig config;
+  @override
+  void initState() {
+    super.initState();
+    config = getConfig();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
