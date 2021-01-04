@@ -73,7 +73,7 @@ GetConfig getConfig() {
         storageSetInt("maxTime", 120);
         storageSetInt("defaultTime", 60);
         storageSetInt("maxQuestionLength", 255);
-        print("error getting config from server: ${error}");
+        print("error getting config from server: $error");
         return GetConfig(
             defaultTime: 60, minTime: 20, maxTime: 120, maxQuestionLength: 255);
       });
@@ -84,5 +84,16 @@ GetConfig getConfig() {
           minTime: storageGetInt("minTime"),
           maxTime: storageGetInt("maxTime"));
     }
+  }).catchError((error) {
+    storageSetString("gotConfigVars", "False");
+    storageSetInt("minTime", 20);
+    storageSetInt("maxTime", 120);
+    storageSetInt("defaultTime", 60);
+    storageSetInt("maxQuestionLength", 255);
+    print("error getting config from server: $error");
+    return GetConfig(
+        defaultTime: 60, minTime: 20, maxTime: 120, maxQuestionLength: 255);
   });
+  return GetConfig(
+      defaultTime: 60, minTime: 20, maxTime: 120, maxQuestionLength: 255);
 }
